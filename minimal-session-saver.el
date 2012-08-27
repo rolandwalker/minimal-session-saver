@@ -4,8 +4,8 @@
 ;;
 ;; Author: Roland Walker walker@pobox.com
 ;; URL: https://github.com/rolandwalker/minimal-session-saver.el
-;; Version: 0.5.0
-;; Last-Updated: 19 Aug 2012
+;; Version: 0.5.1
+;; Last-Updated: 27 Aug 2012
 ;; EmacsWiki: MinimalSessionSaver
 ;; Keywords: session, project
 ;;
@@ -122,7 +122,7 @@
 ;;;###autoload
 (defgroup minimal-session-saver nil
   "Very lean session saver."
-  :version "0.5.0"
+  :version "0.5.1"
   :link '(emacs-commentary-link "minimal-session-saver")
   :prefix "minimal-session-saver-"
   :group 'extensions)
