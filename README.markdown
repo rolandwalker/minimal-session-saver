@@ -32,3 +32,9 @@ installs shorter command aliases for the above.
 See Also
 -------
 M-x customize-group RET minimal-session-saver RET
+
+Compatibility and Requirements
+------------------------------
+Tested only on GNU Emacs version 24.1
+
+No external dependencies
