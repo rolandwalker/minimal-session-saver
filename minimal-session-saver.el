@@ -7,7 +7,7 @@
 ;; Version: 0.5.1
 ;; Last-Updated: 27 Aug 2012
 ;; EmacsWiki: MinimalSessionSaver
-;; Keywords: session, project
+;; Keywords: frames, tools, session, project
 ;;
 ;; Simplified BSD License
 ;;
