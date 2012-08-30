@@ -3,7 +3,8 @@
 ;; Copyright (c) 2012 Roland Walker
 ;;
 ;; Author: Roland Walker walker@pobox.com
-;; URL: https://github.com/rolandwalker/minimal-session-saver.el
+;; Homepage: http://github.com/rolandwalker/minimal-session-saver
+;; URL: http://raw.github.com/rolandwalker/minimal-session-saver/master/minimal-session-saver.el
 ;; Version: 0.5.1
 ;; Last-Updated: 27 Aug 2012
 ;; EmacsWiki: MinimalSessionSaver
