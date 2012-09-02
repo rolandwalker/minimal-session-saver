@@ -135,7 +135,8 @@
   :type 'boolean
   :group 'minimal-session-saver)
 
-(defcustom minimal-session-saver-data-file "~/.emacs.d/data/minimal-session-saver/minimal-session-saver-data.el"
+(defcustom minimal-session-saver-data-file (expand-file-name "minimal-session-saver-data.el"
+                                                             (locate-user-emacs-file "data/minimal-session-saver"))
   "Path to store/retrieve the set of visited files."
   :type 'string
   :group 'minimal-session-saver)
