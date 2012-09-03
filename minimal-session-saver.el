@@ -128,7 +128,7 @@
   :version "0.5.1"
   :link '(emacs-commentary-link "minimal-session-saver")
   :prefix "minimal-session-saver-"
-  :group 'extensions)
+  :group 'tools)
 
 (defcustom minimal-session-saver-less-feedback nil
   "Give less echo area feedback."
