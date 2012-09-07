@@ -1,9 +1,24 @@
 Overview
 ========
+
 Very lean session saver for Emacs.
+
+Quickstart
+----------
+
+	(require 'minimal-session-saver)
+
+	(minimal-session-saver-install-aliases)
+
+	M-x mss-store RET
+
+	;; quit and restart Emacs
+
+	M-x mss-load RET
 
 minimal-session-saver
 ---------------------
+
 The only information stored by this library is a list of visited
 files.  Not window configuration, nor point position.
 
@@ -30,11 +45,13 @@ An additional command
 installs shorter command aliases for the above.
 
 See Also
--------
+--------
+
 M-x customize-group RET minimal-session-saver RET
 
 Compatibility and Requirements
 ------------------------------
+
 Tested on GNU Emacs versions 23.3 and 24.1
 
 No external dependencies
