@@ -127,12 +127,8 @@
 
 ;;; requires
 
-;; for callf, assert, let*, remove-if-not, incf
-(eval-when-compile
-  (require 'cl))
-
-(declare-function remove-if     "cl-seq.el")
-(declare-function remove-if-not "cl-seq.el")
+;; for callf, assert, incf, remove-if, remove-if-not
+(require 'cl)
 
 ;;; customizable variables
 
