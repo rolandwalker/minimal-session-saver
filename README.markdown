@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/rolandwalker/minimal-session-saver.png)](http://travis-ci.org/rolandwalker/minimal-session-saver)
+
 Overview
 ========
 
