@@ -8,15 +8,17 @@ Very lean session saver for Emacs.
 Quickstart
 ----------
 
-	(require 'minimal-session-saver)
-
-	(minimal-session-saver-install-aliases)
-
-	M-x mss-store RET
-
-	;; quit and restart Emacs
-
-	M-x mss-load RET
+```lisp
+(require 'minimal-session-saver)
+ 
+(minimal-session-saver-install-aliases)
+ 
+;; execute M-x mss-store RET
+ 
+;; quit and restart Emacs
+ 
+;; execute M-x mss-load RET
+```
 
 minimal-session-saver
 ---------------------
