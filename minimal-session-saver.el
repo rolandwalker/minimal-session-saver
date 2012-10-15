@@ -74,11 +74,14 @@
 ;;     GNU Emacs version 23.3           : yes
 ;;     GNU Emacs version 22.3 and lower : no
 ;;
-;;     No external dependencies
+;;     Uses if present: frame-bufs.el
 ;;
 ;; Bugs
 ;;
 ;; TODO
+;;
+;;     Store multiple sets/frames in same data file and
+;;     prompt for choice on load?
 ;;
 ;;     Prompt to save all files before running -store
 ;;

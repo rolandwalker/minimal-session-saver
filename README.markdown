@@ -62,4 +62,4 @@ Compatibility and Requirements
 	GNU Emacs version 23.3           : yes
 	GNU Emacs version 22.3 and lower : no
 
-No external dependencies
+Uses if present: frame-bufs.el
