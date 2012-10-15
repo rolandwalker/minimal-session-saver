@@ -127,9 +127,22 @@
 ;; for callf, assert, incf, remove-if, remove-if-not
 (require 'cl)
 
+(eval-when-compile
+  (defvar minimal-session-saver-store-on-exit))
+
 (declare-function frame-bufs-add-buffer "frame-bufs.el")
 
 ;;; customizable variables
+
+;;;###autoload
+(defun minimal-session-saver-customize-set-hooks (symbol value)
+  "Set function which adds or removes hooks.
+
+SYMBOL and VALUE are passed to `custom-set-default'."
+  (custom-set-default symbol value)
+  (if minimal-session-saver-store-on-exit
+      (add-hook 'kill-emacs-hook 'minimal-session-saver-kill-emacs-hook)
+    (remove-hook 'kill-emacs-hook 'minimal-session-saver-kill-emacs-hook)))
 
 ;;;###autoload
 (defgroup minimal-session-saver nil
@@ -150,11 +163,13 @@
   :type 'string
   :group 'minimal-session-saver)
 
+;;;###autoload
 (defcustom minimal-session-saver-store-on-exit nil
   "Automatically store the session data every time you quit Emacs.
 
 This value may also be a string representing a separate data file
 to be used for store-on-exit session data."
+  :set 'minimal-session-saver-customize-set-hooks
   :type '(choice
           (const  :tag "No"   nil)
           (const  :tag "Yes"  t)
@@ -467,6 +482,7 @@ This command can only be called from within a `buff-menu' buffer."
 
 ;;; hooks
 
+;;;###autoload
 (defun minimal-session-saver-kill-emacs-hook ()
   (when minimal-session-saver-store-on-exit
     (let ((minimal-session-saver-data-file (if (stringp minimal-session-saver-store-on-exit)
@@ -474,7 +490,9 @@ This command can only be called from within a `buff-menu' buffer."
                                              minimal-session-saver-data-file)))
       (minimal-session-saver-store))))
 
-(add-hook 'kill-emacs-hook 'minimal-session-saver-kill-emacs-hook)
+;;;###autoload
+(when minimal-session-saver-store-on-exit
+  (add-hook 'kill-emacs-hook 'minimal-session-saver-kill-emacs-hook))
 
 (provide 'minimal-session-saver)
 
