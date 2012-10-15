@@ -226,8 +226,16 @@ in GNU Emacs 24.1 or higher."
         (print-length nil)
         (time (current-time)))
     (when (file-directory-p path)
-      (error "PATH is an existing directory"))
+      (error "PATH is an existing directory, not a file"))
     (when (file-exists-p path)
+      (unless
+          (string-match-p
+           "\\`;+ *minimal-session-saver data file"
+           (with-temp-buffer
+             (insert-file-contents path)
+             (goto-char (point-min))
+             (buffer-substring (point-min) (line-end-position))))
+        (error "PATH exists and is not a minimal-sesssion-saver data file"))
       (copy-file path (concat path "~") t))
     (condition-case nil
         (progn
