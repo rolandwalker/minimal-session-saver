@@ -276,13 +276,13 @@ With universal prefix argument, enter PATH interactively."
 
 Requires frame-bufs.el.
 
-With universal prefix argument, enter PATH interactively."
+When PATH is not supplied, prompts to enter value interactively."
   (interactive)
   (assert (fboundp 'frame-bufs-associated-p) nil "Frame-bufs library not loaded")
-  (callf or path minimal-session-saver-data-file)
+  (callf or path 'prompt)
   (when (or (consp current-prefix-arg)
             (eq path 'prompt))
-    (setq path (read-file-name "Store visited files on frame to: " path)))
+    (setq path (read-file-name "Store visited files on frame to: " default-directory)))
   (let ((file-list (delq nil (mapcar 'buffer-file-name
                                      (remove-if-not 'frame-bufs-associated-p
                                                     (buffer-list))))))
@@ -331,13 +331,13 @@ With universal prefix argument, enter PATH interactively."
 
 Requires frame-bufs.el.
 
-With universal prefix argument, enter PATH interactively."
+When PATH is not supplied, prompts to enter value interactively."
   (interactive)
   (assert (fboundp 'frame-bufs-associated-p) nil "Frame-bufs library not loaded")
-  (callf or path minimal-session-saver-data-file)
+  (callf or path 'prompt)
   (when (or (consp current-prefix-arg)
             (eq path 'prompt))
-    (setq path (read-file-name "Load visited files from: " path)))
+    (setq path (read-file-name "Load visited files from: " default-directory)))
   (let ((file-list (minimal-session-saver-read path))
         (frame nil))
     (with-current-buffer "*scratch*"
