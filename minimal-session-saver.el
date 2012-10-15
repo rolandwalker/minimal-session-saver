@@ -311,6 +311,8 @@ With universal prefix argument, enter PATH interactively."
         (callf concat warning (format ", %s already open" (length visiting-list))))
       (when nonexistent-list
         (callf concat warning (format ", creating %s" (length nonexistent-list))))
+      (when (> (- (length file-list) (length visiting-list)) 25)
+        (callf concat warning " -- it may take a moment for hooks to run"))
       (message "Visited %s files%s" (length file-list) warning))))
 
 ;;;###autoload
