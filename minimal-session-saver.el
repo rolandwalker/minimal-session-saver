@@ -57,7 +57,8 @@
 ;;
 ;;     minimal-session-saver-install-aliases
 ;;
-;; installs shorter command aliases for the above.
+;; installs shorter command aliases for the above, and can
+;; be run at autoload-time through a setting in customize.
 ;;
 ;; See Also
 ;;
@@ -153,6 +154,49 @@
   "Path to store/retrieve the set of visited files."
   :type 'string
   :group 'minimal-session-saver)
+
+;;;###autoload
+(defcustom minimal-session-saver-install-short-aliases nil
+  "Install short aliases such as `mss-load' for `minimal-session-saver-load'."
+  :type 'boolean
+  :group 'minimal-session-saver)
+
+;;; aliases
+
+;;;###autoload
+(defun minimal-session-saver-install-aliases (&optional arg)
+  "Install aliases outside the \"minimal-session-saver-\" namespace.
+
+With optional negative ARG, uninstall aliases.
+
+The following aliases will be installed
+
+   mss-store                for   minimal-session-saver-store
+   mss-store-frame          for   minimal-session-saver-store-frame
+   mss-load                 for   minimal-session-saver-load
+   mss-add-buffer           for   minimal-session-saver-add-buffer
+   mss-remove-buffer        for   minimal-session-saver-remove-buffer
+   mss-mark-stored-buffers  for   minimal-session-saver-mark-stored-buffers"
+  (let ((syms '(
+                store
+                store-frame
+                load
+                add-buffer
+                remove-buffer
+                mark-stored-buffers
+                )))
+    (cond
+      ((and (numberp arg)
+            (< arg 0))
+       (dolist (sym syms)
+         (fmakunbound (intern (format "mss-%s" sym)))))
+      (t
+       (dolist (sym syms)
+         (defalias (intern (format "mss-%s" sym)) (intern (format "minimal-session-saver-%s" sym))))))))
+
+;;;###autoload
+(when minimal-session-saver-install-short-aliases
+  (minimal-session-saver-install-aliases))
 
 ;;; macros
 
@@ -351,26 +395,6 @@ This command can only be called from within a `buff-menu' buffer."
     (when (and (minimal-session-saver-called-interactively-p 'any)
                (not minimal-session-saver-less-feedback))
       (message "Marked %s buffer/s" counter))))
-
-;;;###autoload
-(defun minimal-session-saver-install-aliases ()
-  "Install aliases outside the \"minimal-session-saver-\" namespace.
-
-The following aliases will be installed
-
-   mss-store                for   minimal-session-saver-store
-   mss-store-frame          for   minimal-session-saver-store-frame
-   mss-load                 for   minimal-session-saver-load
-   mss-add-buffer           for   minimal-session-saver-add-buffer
-   mss-remove-buffer        for   minimal-session-saver-remove-buffer
-   mss-mark-stored-buffers  for   minimal-session-saver-mark-stored-buffers"
-  (interactive)
-  (defalias 'mss-store                 'minimal-session-saver-store)
-  (defalias 'mss-store-frame           'minimal-session-saver-store-frame)
-  (defalias 'mss-load                  'minimal-session-saver-load)
-  (defalias 'mss-add-buffer            'minimal-session-saver-add-buffer)
-  (defalias 'mss-remove-buffer         'minimal-session-saver-remove-buffer)
-  (defalias 'mss-mark-stored-buffers   'minimal-session-saver-mark-stored-buffers))
 
 (provide 'minimal-session-saver)
 

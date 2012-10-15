@@ -3,9 +3,15 @@
 
 (require 'minimal-session-saver)
 
-;;; this is a stub - no tests defined
+;;; minimal-session-saver-install-aliases
 
-;;; minimal-session-saver-read (path)
+(ert-deftest minimal-session-saver-install-aliases-01 nil
+  (minimal-session-saver-install-aliases)
+  (should (fboundp 'mss-load)))
+
+(ert-deftest minimal-session-saver-install-aliases-02 nil
+  (minimal-session-saver-install-aliases -1)
+  (should-not (fboundp 'mss-load)))
 
 ;;; minimal-session-saver-write (path file-list)
 
@@ -22,8 +28,6 @@
 ;;; minimal-session-saver-remove-buffer (&optional path buffer)
 
 ;;; minimal-session-saver-mark-stored-buffers (&optional path char col)
-
-;;; minimal-session-saver-install-aliases ()
 
 ;;
 ;; Emacs
