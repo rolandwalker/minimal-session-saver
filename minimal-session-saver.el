@@ -80,8 +80,6 @@
 ;;
 ;; TODO
 ;;
-;;     Optional save or prompt on kill-emacs hook
-;;
 ;;     Prompt to save all files before running -store
 ;;
 ;;     don't count already marked buffers in buff-menu function
@@ -150,6 +148,17 @@
                                                              (locate-user-emacs-file "data/minimal-session-saver"))
   "Path to store/retrieve the set of visited files."
   :type 'string
+  :group 'minimal-session-saver)
+
+(defcustom minimal-session-saver-store-on-exit nil
+  "Automatically store the session data every time you quit Emacs.
+
+This value may also be a string representing a separate data file
+to be used for store-on-exit session data."
+  :type '(choice
+          (const  :tag "No"   nil)
+          (const  :tag "Yes"  t)
+          (string :tag "Custom Location"))
   :group 'minimal-session-saver)
 
 ;;;###autoload
@@ -455,6 +464,17 @@ This command can only be called from within a `buff-menu' buffer."
     (when (and (minimal-session-saver-called-interactively-p 'any)
                (not minimal-session-saver-less-feedback))
       (message "Marked %s buffer/s" counter))))
+
+;;; hooks
+
+(defun minimal-session-saver-kill-emacs-hook ()
+  (when minimal-session-saver-store-on-exit
+    (let ((minimal-session-saver-data-file (if (stringp minimal-session-saver-store-on-exit)
+                                               minimal-session-saver-store-on-exit
+                                             minimal-session-saver-data-file)))
+      (minimal-session-saver-store))))
+
+(add-hook 'kill-emacs-hook 'minimal-session-saver-kill-emacs-hook)
 
 (provide 'minimal-session-saver)
 
