@@ -279,7 +279,8 @@ With universal prefix argument, enter PATH interactively."
   (let ((file-list (delq nil (mapcar 'buffer-file-name
                                      (remove-if-not 'frame-bufs-associated-p
                                                     (buffer-list))))))
-    (minimal-session-saver-store path file-list)
+    (let ((current-prefix-arg nil))
+      (minimal-session-saver-store path file-list))
     (when (and (minimal-session-saver-called-interactively-p 'any)
                (not minimal-session-saver-less-feedback))
       (message "Stored %s filenames" (length file-list)))))
