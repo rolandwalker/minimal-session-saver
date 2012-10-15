@@ -263,7 +263,7 @@ History of input is kept in `minimal-session-saver-file-name-history'."
       (read (current-buffer)))))
 
 (defun minimal-session-saver-write (path file-list)
-  "Write FILE-LIST to fully-qualified filename PATH."
+  "Write to fully-qualified filename PATH, the contents of FILE-LIST."
   (let ((print-level nil)
         (print-length nil)
         (time (current-time)))
@@ -277,7 +277,7 @@ History of input is kept in `minimal-session-saver-file-name-history'."
              (insert-file-contents path)
              (goto-char (point-min))
              (buffer-substring (point-min) (line-end-position))))
-        (error "PATH exists and is not a minimal-sesssion-saver data file"))
+        (error "PATH exists and is not a minimal-session-saver data file"))
       (copy-file path (concat path "~") t))
     (condition-case nil
         (progn
@@ -487,6 +487,10 @@ This command can only be called from within a `buff-menu' buffer."
 
 ;;;###autoload
 (defun minimal-session-saver-kill-emacs-hook ()
+  "Optionally save session data at shutdown time.
+
+This function has not effect unless the variable
+`minimal-session-saver-store-on-exit' is non-nil."
   (when minimal-session-saver-store-on-exit
     (let ((minimal-session-saver-data-file (if (stringp minimal-session-saver-store-on-exit)
                                                minimal-session-saver-store-on-exit
@@ -510,7 +514,7 @@ This command can only be called from within a `buff-menu' buffer."
 ;; byte-compile-warnings: (not cl-functions redefine)
 ;; End:
 ;;
-;; LocalWords: MinimalSessionSaver incf callf bufs
+;; LocalWords: MinimalSessionSaver incf callf bufs MUSTMATCH devel
 ;;
 
 ;;; minimal-session-saver.el ends here
