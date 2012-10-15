@@ -13,6 +13,8 @@
   (minimal-session-saver-install-aliases -1)
   (should-not (fboundp 'mss-load)))
 
+;;; minimal-session-saver-read-file-name
+
 ;;; minimal-session-saver-write (path file-list)
 
 ;;; minimal-session-saver-mkdir-for-file (path)

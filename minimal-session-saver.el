@@ -86,8 +86,6 @@
 ;;
 ;;     don't count already marked buffers in buff-menu function
 ;;
-;;     separate history variable?
-;;
 ;;; License
 ;;
 ;; Simplified BSD License:
@@ -160,6 +158,11 @@
   :type 'boolean
   :group 'minimal-session-saver)
 
+;;; variables
+
+(defvar minimal-session-saver-file-name-history nil
+  "History of data file names entered in minimal-session-saver.")
+
 ;;; aliases
 
 ;;;###autoload
@@ -211,6 +214,18 @@ in GNU Emacs 24.1 or higher."
     `(called-interactively-p ,kind)))
 
 ;;; utility functions
+
+(defun minimal-session-saver-read-file-name (prompt &optional dir default-filename mustmatch initial predicate)
+  "Prompt for a data file for use by minimal-session-saver.
+
+PROMPT, DIR, DEFAULT-FILENAME, MUSTMATCH, INITIAL, and PREDICATE
+are as documented for `read-file-name'.
+
+History of input is kept in `minimal-session-saver-file-name-history'."
+  (let ((file-name-history minimal-session-saver-file-name-history))
+    (prog1
+        (read-file-name prompt dir default-filename mustmatch initial predicate)
+      (setq minimal-session-saver-file-name-history file-name-history))))
 
 (defun minimal-session-saver-read (path)
   "Read and return the file list from PATH."
@@ -269,7 +284,7 @@ With universal prefix argument, enter PATH interactively."
   (callf or path minimal-session-saver-data-file)
   (when (or (consp current-prefix-arg)
             (eq path 'prompt))
-    (setq path (read-file-name "Store visited files to: " nil path)))
+    (setq path (minimal-session-saver-read-file-name "Store visited files to: " nil path)))
   (minimal-session-saver-mkdir-for-file path)
   (callf or file-list (delq nil (mapcar 'buffer-file-name (buffer-list))))
   (when (or file-list (prog1 (y-or-n-p (propertize "Really store an empty list?" 'face 'highlight)) (message "")))
@@ -290,7 +305,7 @@ When PATH is not supplied, prompts to enter value interactively."
   (callf or path 'prompt)
   (when (or (consp current-prefix-arg)
             (eq path 'prompt))
-    (setq path (read-file-name "Store visited files on frame to: " default-directory "")))
+    (setq path (minimal-session-saver-read-file-name "Store visited files on frame to: " default-directory "")))
   (let ((file-list (delq nil (mapcar 'buffer-file-name
                                      (remove-if-not 'frame-bufs-associated-p
                                                     (buffer-list))))))
@@ -309,7 +324,7 @@ With universal prefix argument, enter PATH interactively."
   (callf or path minimal-session-saver-data-file)
   (when (or (consp current-prefix-arg)
             (eq path 'prompt))
-    (setq path (read-file-name "Load visited files from: " nil path)))
+    (setq path (minimal-session-saver-read-file-name "Load visited files from: " nil path)))
   (let* ((file-list (minimal-session-saver-read path))
          (nonexistent-list (remove-if 'file-exists-p
                                       (remove-if 'file-remote-p file-list)))
@@ -346,7 +361,7 @@ When PATH is not supplied, prompts to enter value interactively."
   (callf or path 'prompt)
   (when (or (consp current-prefix-arg)
             (eq path 'prompt))
-    (setq path (read-file-name "Load visited files from: " default-directory "")))
+    (setq path (minimal-session-saver-read-file-name "Load visited files from: " default-directory "")))
   (let ((file-list (minimal-session-saver-read path))
         (frame nil))
     (with-current-buffer "*scratch*"
@@ -371,7 +386,7 @@ When BUFFER is not visiting a file, there is no effect."
   (callf or buffer (current-buffer))
   (when (or (consp current-prefix-arg)
             (eq path 'prompt))
-    (setq path (read-file-name "Add to session listing at: " nil path)))
+    (setq path (minimal-session-saver-read-file-name "Add to session listing at: " nil path)))
   (let* ((file-list (minimal-session-saver-read path))
          (orig-count (length file-list)))
     (add-to-list 'file-list (buffer-file-name buffer))
@@ -394,7 +409,7 @@ which was not in the list, there is no effect."
   (callf or buffer (current-buffer))
   (when (or (consp current-prefix-arg)
             (eq path 'prompt))
-    (setq path (read-file-name "Remove from session listing at: " nil path)))
+    (setq path (minimal-session-saver-read-file-name "Remove from session listing at: " nil path)))
   (let* ((file-list (minimal-session-saver-read path))
          (orig-count (length file-list)))
     (setq file-list (remove (buffer-file-name buffer) file-list))
@@ -421,7 +436,7 @@ This command can only be called from within a `buff-menu' buffer."
   (callf or path minimal-session-saver-data-file)
   (when (or (consp current-prefix-arg)
             (eq path 'prompt))
-    (setq path (read-file-name "Read session listing from: " nil path)))
+    (setq path (minimal-session-saver-read-file-name "Read session listing from: " nil path)))
   (callf or char (if (boundp 'buff-menu-marker-char) buff-menu-marker-char ?>))
   (callf or col 0)
   (let ((inhibit-read-only t)
