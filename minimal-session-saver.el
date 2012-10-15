@@ -218,10 +218,14 @@ in GNU Emacs 24.1 or higher."
       (read (current-buffer)))))
 
 (defun minimal-session-saver-write (path file-list)
-  "Write FILE-LIST to PATH."
+  "Write FILE-LIST to fully-qualified filename PATH."
   (let ((print-level nil)
         (print-length nil)
         (time (current-time)))
+    (when (file-directory-p path)
+      (error "PATH is an existing directory"))
+    (when (file-exists-p path)
+      (copy-file path (concat path "~") t))
     (condition-case nil
         (progn
           (assert file-list)
