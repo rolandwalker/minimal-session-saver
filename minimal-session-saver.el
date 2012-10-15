@@ -45,8 +45,9 @@
 ;; Five interactive commands are provided to manage sessions:
 ;;
 ;;     minimal-session-saver-store
-;;     minimal-session-saver-store-frame
 ;;     minimal-session-saver-load
+;;     minimal-session-saver-store-frame
+;;     minimal-session-saver-load-frame
 ;;     minimal-session-saver-add-buffer
 ;;     minimal-session-saver-remove-buffer
 ;;     minimal-session-saver-mark-stored-buffers
@@ -78,8 +79,6 @@
 ;; Bugs
 ;;
 ;; TODO
-;;
-;;     Load to a frame
 ;;
 ;;     Optional save or prompt on kill-emacs hook
 ;;
@@ -132,6 +131,8 @@
 ;; for callf, assert, incf, remove-if, remove-if-not
 (require 'cl)
 
+(declare-function frame-bufs-add-buffer "frame-bufs.el")
+
 ;;; customizable variables
 
 ;;;###autoload
@@ -170,15 +171,17 @@ With optional negative ARG, uninstall aliases.
 The following aliases will be installed
 
    mss-store                for   minimal-session-saver-store
-   mss-store-frame          for   minimal-session-saver-store-frame
    mss-load                 for   minimal-session-saver-load
+   mss-store-frame          for   minimal-session-saver-store-frame
+   mss-load-frame           for   minimal-session-saver-load-frame
    mss-add-buffer           for   minimal-session-saver-add-buffer
    mss-remove-buffer        for   minimal-session-saver-remove-buffer
    mss-mark-stored-buffers  for   minimal-session-saver-mark-stored-buffers"
   (let ((syms '(
                 store
-                store-frame
                 load
+                store-frame
+                load-frame
                 add-buffer
                 remove-buffer
                 mark-stored-buffers
@@ -321,6 +324,30 @@ With universal prefix argument, enter PATH interactively."
       (when (> (- (length file-list) (length visiting-list)) 25)
         (callf concat warning " -- it may take a moment for hooks to run"))
       (message "Visited %s files%s" (length file-list) warning))))
+
+;;;###autoload
+(defun minimal-session-saver-load-frame (&optional path)
+  "Load the saved set of visited files from PATH into a new frame.
+
+Requires frame-bufs.el.
+
+With universal prefix argument, enter PATH interactively."
+  (interactive)
+  (assert (fboundp 'frame-bufs-associated-p) nil "Frame-bufs library not loaded")
+  (callf or path minimal-session-saver-data-file)
+  (when (or (consp current-prefix-arg)
+            (eq path 'prompt))
+    (setq path (read-file-name "Load visited files from: " path)))
+  (let ((file-list (minimal-session-saver-read path))
+        (frame nil))
+    (with-current-buffer "*scratch*"
+      (setq frame (make-frame))
+      (let ((current-prefix-arg nil))
+        (minimal-session-saver-load path))
+      (dolist (f file-list)
+        (let ((buf (get-file-buffer f)))
+          (when buf
+            (frame-bufs-add-buffer buf frame)))))))
 
 ;;;###autoload
 (defun minimal-session-saver-add-buffer (&optional path buffer)

@@ -21,6 +21,8 @@
 
 ;;; minimal-session-saver-store-frame (&optional path)
 
+;;; minimal-session-saver-load-frame (&optional path)
+
 ;;; minimal-session-saver-load (&optional path)
 
 ;;; minimal-session-saver-add-buffer (&optional path buffer)
