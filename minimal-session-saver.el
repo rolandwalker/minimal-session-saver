@@ -125,10 +125,12 @@
 ;;; Code:
 ;;
 
-;;; requires
+;;; requirements
 
 ;; for callf, assert, incf, remove-if, remove-if-not
 (require 'cl)
+
+;;; declarations
 
 (eval-when-compile
   (defvar minimal-session-saver-store-on-exit))
