@@ -32,9 +32,9 @@
 ;; files.  Not window configuration, nor point position.
 ;;
 ;; Giving a universal prefix argument to any of the interactive
-;; session-management commands prompts for the session-state file
-;; location, allowing minimal-session-saver to be used as a (very)
-;; minimal project manager.
+;; session-management commands causes a prompt for the session-state
+;; file location, allowing minimal-session-saver to be used as a
+;; (very) minimal project manager.
 ;;
 ;; To use minimal-session-saver, place the minimal-session-saver.el
 ;; library somewhere Emacs can find it, and add the following to your
