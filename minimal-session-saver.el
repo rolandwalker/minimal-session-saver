@@ -36,6 +36,9 @@
 ;; file location, allowing minimal-session-saver to be used as a
 ;; (very) minimal project manager.
 ;;
+;; When frame-bufs.el is present, the session associated with a
+;; particular frame can be stored and recovered.
+;;
 ;; To use minimal-session-saver, place the minimal-session-saver.el
 ;; library somewhere Emacs can find it, and add the following to your
 ;; ~/.emacs file:
@@ -46,8 +49,8 @@
 ;;
 ;;     minimal-session-saver-store
 ;;     minimal-session-saver-load
-;;     minimal-session-saver-store-frame
-;;     minimal-session-saver-load-frame
+;;     minimal-session-saver-store-frame         ; requires frame-bufs.el
+;;     minimal-session-saver-load-frame          ; requires frame-bufs.el
 ;;     minimal-session-saver-add-buffer
 ;;     minimal-session-saver-remove-buffer
 ;;     minimal-session-saver-mark-stored-buffers

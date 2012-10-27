@@ -31,11 +31,15 @@ session-management commands causes a prompt for the session-state
 file location, allowing minimal-session-saver to be used as a
 (very) minimal project manager.
 
+When frame-bufs.el is present, the session associated with a
+particular frame can be stored and recovered.
+
 Five interactive commands are provided to manage sessions:
 
 	minimal-session-saver-store
-	minimal-session-saver-store-frame
 	minimal-session-saver-load
+	minimal-session-saver-store-frame      ; requires frame-bufs.el
+	minimal-session-saver-load-frame       ; requires frame-bufs.el
 	minimal-session-saver-add-buffer
 	minimal-session-saver-remove-buffer
 	minimal-session-saver-mark-stored-buffers
