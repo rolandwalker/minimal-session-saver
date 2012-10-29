@@ -34,7 +34,7 @@ file location, allowing minimal-session-saver to be used as a
 When frame-bufs.el is present, the session associated with a
 particular frame can be stored and recovered.
 
-Five interactive commands are provided to manage sessions:
+Several interactive commands are provided to manage sessions:
 
 	minimal-session-saver-store
 	minimal-session-saver-load

@@ -45,7 +45,7 @@
 ;;
 ;;     (require 'minimal-session-saver)
 ;;
-;; Five interactive commands are provided to manage sessions:
+;; Several interactive commands are provided to manage sessions:
 ;;
 ;;     minimal-session-saver-store
 ;;     minimal-session-saver-load
