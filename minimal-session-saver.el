@@ -157,7 +157,7 @@ SYMBOL and VALUE are passed to `custom-set-default'."
   "Very lean session saver."
   :version "0.6.0"
   :link '(emacs-commentary-link :tag "Commentary" "minimal-session-saver")
-  :link '(url-link :tag "Github" "http://github.com/rolandwalker/minimal-session-saver")
+  :link '(url-link :tag "GitHub" "http://github.com/rolandwalker/minimal-session-saver")
   :link '(url-link :tag "EmacsWiki" "http://emacswiki.org/emacs/MinimalSessionSaver")
   :prefix "minimal-session-saver-"
   :group 'tools)
