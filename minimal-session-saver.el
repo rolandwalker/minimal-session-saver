@@ -253,6 +253,34 @@ in GNU Emacs 24.1 or higher."
     (t
      '(called-interactively-p))))
 
+;;; compatibility functions
+
+(unless (fboundp 'locate-user-emacs-file)
+  (defun locate-user-emacs-file (new-name &optional old-name)
+    "Return an absolute per-user Emacs-specific file name.
+If OLD-NAME is non-nil and ~/OLD-NAME exists, return ~/OLD-NAME.
+Else return NEW-NAME in `user-emacs-directory', creating the
+directory if it does not exist."
+    (convert-standard-filename
+     (let* ((home (concat "~" (or init-file-user "")))
+            (at-home (and old-name (expand-file-name old-name home))))
+       (if (and at-home (file-readable-p at-home))
+           at-home
+         ;; Make sure `user-emacs-directory' exists,
+         ;; unless we're in batch mode or dumping Emacs
+         (or noninteractive
+             purify-flag
+             (file-accessible-directory-p
+              (directory-file-name user-emacs-directory))
+             (let ((umask (default-file-modes)))
+               (unwind-protect
+                   (progn
+                     (set-default-file-modes ?\700)
+                     (make-directory user-emacs-directory))
+                 (set-default-file-modes umask))))
+         (abbreviate-file-name
+          (expand-file-name new-name user-emacs-directory)))))))
+
 ;;; utility functions
 
 (defun minimal-session-saver-read-file-name (prompt &optional dir default-filename mustmatch initial predicate)
