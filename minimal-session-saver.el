@@ -150,6 +150,9 @@
       (string-match regexp string start))))
 
 (unless (fboundp 'locate-user-emacs-file)
+  (unless (boundp 'user-emacs-directory)
+    (defvar user-emacs-directory "~/.emacs.d/"
+      "Directory beneath which additional per-user Emacs-specific files are placed."))
   (defun locate-user-emacs-file (new-name &optional old-name)
     "Return an absolute per-user Emacs-specific file name.
 If OLD-NAME is non-nil and ~/OLD-NAME exists, return ~/OLD-NAME.
