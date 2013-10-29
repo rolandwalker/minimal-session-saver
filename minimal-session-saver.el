@@ -5,8 +5,8 @@
 ;; Author: Roland Walker <walker@pobox.com>
 ;; Homepage: http://github.com/rolandwalker/minimal-session-saver
 ;; URL: http://raw.github.com/rolandwalker/minimal-session-saver/master/minimal-session-saver.el
-;; Version: 0.6.0
-;; Last-Updated: 15 Oct 2012
+;; Version: 0.6.2
+;; Last-Updated: 29 Oct 2013
 ;; EmacsWiki: MinimalSessionSaver
 ;; Keywords: tools, frames, project
 ;;
@@ -194,7 +194,7 @@ SYMBOL and VALUE are passed to `custom-set-default'."
 ;;;###autoload
 (defgroup minimal-session-saver nil
   "Very lean session saver."
-  :version "0.6.0"
+  :version "0.6.2"
   :link '(emacs-commentary-link :tag "Commentary" "minimal-session-saver")
   :link '(url-link :tag "GitHub" "http://github.com/rolandwalker/minimal-session-saver")
   :link '(url-link :tag "EmacsWiki" "http://emacswiki.org/emacs/MinimalSessionSaver")
