@@ -1,6 +1,6 @@
 ;;; minimal-session-saver.el --- Very lean session saver
 ;;
-;; Copyright (c) 2012 Roland Walker
+;; Copyright (c) 2012-13 Roland Walker
 ;;
 ;; Author: Roland Walker <walker@pobox.com>
 ;; Homepage: http://github.com/rolandwalker/minimal-session-saver
