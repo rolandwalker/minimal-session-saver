@@ -52,7 +52,7 @@ be run at autoload-time through a setting in customize.
 
 ## See Also
 
-<kbd>M-x</kbd> <kbd>customize-group</kbd> <kbd>RET</kbd> <kbd>minimal-session-saver</kbd> <kbd>RET</kbd>
+* <kbd>M-x</kbd> <kbd>customize-group</kbd> <kbd>RET</kbd> <kbd>minimal-session-saver</kbd> <kbd>RET</kbd>
 
 ## Compatibility and Requirements
 
