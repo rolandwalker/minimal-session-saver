@@ -8,7 +8,7 @@ Very lean session saver for Emacs.
 Quickstart
 ----------
 
-```lisp
+```elisp
 (require 'minimal-session-saver)
  
 (minimal-session-saver-install-aliases)
