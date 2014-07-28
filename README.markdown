@@ -1,12 +1,10 @@
 [![Build Status](https://secure.travis-ci.org/rolandwalker/minimal-session-saver.png?branch=master)](http://travis-ci.org/rolandwalker/minimal-session-saver)
 
-Overview
-========
+# Overview
 
 Very lean session saver for Emacs.
 
-Quickstart
-----------
+## Quickstart
 
 ```elisp
 (require 'minimal-session-saver)
@@ -20,8 +18,7 @@ Quickstart
 ;; execute M-x mss-load RET
 ```
 
-Explanation
------------
+## Explanation
 
 The only information stored by this library is a list of visited
 files.  Not window configuration, nor point position.
@@ -53,13 +50,11 @@ An additional command
 installs shorter command aliases for the above, and can
 be run at autoload-time through a setting in customize.
 
-See Also
---------
+## See Also
 
 M-x customize-group RET minimal-session-saver RET
 
-Compatibility and Requirements
-------------------------------
+## Compatibility and Requirements
 
 	GNU Emacs version 24.4-devel     : yes, at the time of writing
 	GNU Emacs version 24.3           : yes
