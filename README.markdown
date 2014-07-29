@@ -48,7 +48,7 @@ An additional command
 	minimal-session-saver-install-aliases
 
 installs shorter command aliases for the above, and can
-be run at autoload-time through a setting in customize.
+be run at autoload-time through a setting in `customize`.
 
 ## See Also
 
