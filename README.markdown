@@ -62,4 +62,4 @@ be run at autoload-time through a setting in customize.
 	GNU Emacs version 22.2           : yes, with some limitations
 	GNU Emacs version 21.x and lower : unknown
 
-Uses if present: frame-bufs.el
+Uses if present: [frame-bufs.el](https://github.com/alpaker/Frame-Bufs)
