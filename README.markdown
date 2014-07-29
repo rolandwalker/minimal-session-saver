@@ -28,7 +28,7 @@ session-management commands causes a prompt for the session-state
 file location, allowing minimal-session-saver to be used as a
 (very) minimal project manager.
 
-When frame-bufs.el is present, the session associated with a
+When `frame-bufs.el` is present, the session associated with a
 particular frame can be stored and recovered.
 
 Several interactive commands are provided to manage sessions:
